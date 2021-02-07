@@ -17,33 +17,38 @@ jobs:
       matrix:
         config:
         - {
-            name: "Windows Latest MSVC", artifact: "Windows-MSVC.7z",
+            name: "Windows Latest MSVC",
             os: windows-latest,
             cc: "cl", cxx: "cl",
             environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           }
         - {
-            name: "Windows Latest MinGW", artifact: "Windows-MinGW.7z",
+            name: "Windows Latest MinGW",
             os: windows-latest,
             cc: "gcc", cxx: "g++"
           }
         - {
-            name: "Windows Latest MinClang", artifact: "Windows-MinClang.7z",
+            name: "Windows Latest MinClang",
             os: windows-latest,
             cc: "clang", cxx: "clang++"
           }
         - {
-            name: "Ubuntu Latest GCC", artifact: "Linux-GCC.7z",
+            name: "Ubuntu Latest GCC",
             os: ubuntu-latest,
             cc: "gcc", cxx: "g++"
           }
         - {
-            name: "Ubuntu Latest Clang", artifact: "Linux-Clang.7z",
+            name: "Ubuntu Latest Clang",
             os: ubuntu-latest,
             cc: "clang", cxx: "clang++"
           }
         - {
-            name: "macOS Latest Clang", artifact: "macOS.7z",
+            name: "macOS Latest GCC",
+            os: macos-latest,
+            cc: "gcc", cxx: "g++"
+          }
+        - {
+            name: "macOS Latest Clang",
             os: macos-latest,
             cc: "clang", cxx: "clang++"
           }
