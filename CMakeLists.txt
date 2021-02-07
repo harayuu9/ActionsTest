@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 
 project(main)
 set(CMAKE_CXX_STANDARD $ENV{CPP_VERSION})
-set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG -Oi")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG")
 
 if(MSVC)
   # Force to always compile with W4
@@ -13,10 +13,11 @@ if(MSVC)
   endif()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /WX")
   set(CMAKE_CXX_FLAGS_DEBUG "/Od")
-  set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /GL -Ot")
+  set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Oi -GL -Ot")
 else()
   # Update if necessary
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-long-long -pedantic-errors")
+  set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -g")
   set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
 endif()
 
