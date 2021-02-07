@@ -28,7 +28,7 @@ jobs:
             environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           }
         - {
-            name: "Windows MSVC-20 Release",
+            name: "Windows MSVC-20 Debug",
             os: windows-latest,
             cc: "cl", cxx: "cl", version: "20", buildtype : "Debug",
             environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
