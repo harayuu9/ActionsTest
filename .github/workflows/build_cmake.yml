@@ -43,7 +43,7 @@ jobs:
             cc: "clang", cxx: "clang++", version: "17", buildtype : "Release"
           }
         - {
-            name: "Ubuntu Latest Clang-20,
+            name: "Ubuntu Latest Clang-20",
             os: ubuntu-latest,
             cc: "clang", cxx: "clang++", version: "20", buildtype : "Release"
           }
