@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 
 project(main)
 set(CMAKE_CXX_STANDARD $ENV{CPP_VERSION})
-set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG)
+set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG")
 
 if(MSVC)
   # Force to always compile with W4
