@@ -191,7 +191,6 @@ jobs:
           message(FATAL_ERROR "Bad exit status")
         endif()
 
-
     - name: Build
       shell: cmake -P {0}
       run: |
