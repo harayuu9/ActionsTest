@@ -1,6 +1,12 @@
-#include <iostream>
+#include <gtest/gtest.h>
 
-//int main()
-//{
-//  std::cout << "Hello world\n";
-//}
+// TESTマクロを使う場合
+
+// 第1引数がテストケース名、第2引数がテスト名
+TEST(MyLibraryTest, Function1Test) {
+    //...
+}
+
+TEST(MyLibraryTest, Class1Test) {
+    //...
+}
