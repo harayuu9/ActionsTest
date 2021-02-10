@@ -4,10 +4,10 @@
 
 // 第1引数がテストケース名、第2引数がテスト名
 TEST(MyLibraryTest, Function1Test) {
-    ASSERT_TRUE(false) << "失敗してみた";
+    ASSERT_TRUE(false) /*<< "失敗してみた"*/;
 }
 
 TEST(MyLibraryTest, Class1Test) {
-    ASSERT_TRUE(false) << u"失敗してみた２";
+    ASSERT_TRUE(false)/* << u"失敗してみた２"*/;
     //...
 }
