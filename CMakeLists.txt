@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 
 # Download and unpack googletest at configure time
-configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
+configure_file(CMakeListsTest.txt googletest-download/CMakeLists.txt)
 execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
   RESULT_VARIABLE result
   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
@@ -23,9 +23,23 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
                  ${CMAKE_CURRENT_BINARY_DIR}/googletest-build
                  EXCLUDE_FROM_ALL)
 
-if (CMAKE_VERSION VERSION_LESS 2.8.11)
-  include_directories("${gtest_SOURCE_DIR}/include")
+configure_file(CMakeListsBench.txt googlebenchmark-download/CMakeLists.txt)
+execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+  RESULT_VARIABLE result
+  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googlebenchmark-download )
+if(result)
+  message(FATAL_ERROR "CMake step for googlebenchmark failed: ${result}")
 endif()
+execute_process(COMMAND ${CMAKE_COMMAND} --build .
+  RESULT_VARIABLE result
+  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googlebenchmark-download )
+if(result)
+  message(FATAL_ERROR "Build step for googlebenchmark failed: ${result}")
+endif()
+
+add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googlebenchmark-src
+                 ${CMAKE_CURRENT_BINARY_DIR}/googlebenchmark-build
+                 EXCLUDE_FROM_ALL)
 
 project(main)
 set(CMAKE_CXX_STANDARD $ENV{CPP_VERSION})
@@ -49,7 +63,14 @@ else()
 endif()
 
 add_executable(main main.cpp)
+
+if($ENV{IS_PERFORMANCE_TEST})
+target_link_libraries(main gtest)
+target_link_libraries(main benchmark_main)
+else()
 target_link_libraries(main gtest_main)
+target_link_libraries(main benchmark)
+endif()
 
 install(TARGETS main)
 
