@@ -256,6 +256,4 @@ jobs:
           string(REPLACE "\n" "%0A" test_results "${test_results}")
           message("::error::${test_results}")
           message(FATAL_ERROR "Running tests failed!")
-        else()
-          message("${output}")
         endif()
