@@ -1,4 +1,4 @@
-name: CMake Build
+name: CMake Benchmark
 
 on: [push, pull_request]
 
@@ -126,6 +126,7 @@ jobs:
         set(ENV{CXX} ${{ matrix.config.cxx }})
         set(ENV{CPP_VERSION} ${{ matrix.config.version }})
         set(ENV{IS_PERFORMANCE_TEST} "TRUE")
+        set(BENCHMARK_ENABLE_TESTING FALSE CACHE BOOL description FORCE)
 
         if ("${{ runner.os }}" STREQUAL "Windows" AND NOT "x${{ matrix.config.environment_script }}" STREQUAL "x")
           execute_process(

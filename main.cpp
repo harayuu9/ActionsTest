@@ -1,23 +1,22 @@
-#include <gtest/gtest.h>
+ï»¿#include <gtest/gtest.h>
 
 #include <benchmark/benchmark.h>
 
-// TESTƒ}ƒNƒ‚ðŽg‚¤ê‡
+// TESTãƒžã‚¯ãƒ­ã‚’ä½¿ã†å ´åˆ
 
-// ‘æ1ˆø”‚ªƒeƒXƒgƒP[ƒX–¼A‘æ2ˆø”‚ªƒeƒXƒg–¼
+// ç¬¬1å¼•æ•°ãŒãƒ†ã‚¹ãƒˆã‚±ãƒ¼ã‚¹åã€ç¬¬2å¼•æ•°ãŒãƒ†ã‚¹ãƒˆå
 TEST(MyLibraryTest, Function1Test) {
-    ASSERT_TRUE(true) /*<< "Ž¸”s‚µ‚Ä‚Ý‚½"*/;
+    ASSERT_TRUE(true) /*<< "å¤±æ•—ã—ã¦ã¿ãŸ"*/;
 }
 
 TEST(MyLibraryTest, Class1Test) {
-    ASSERT_TRUE(true)/* << u"Ž¸”s‚µ‚Ä‚Ý‚½‚Q"*/;
+    ASSERT_TRUE(true)/* << u"å¤±æ•—ã—ã¦ã¿ãŸï¼’"*/;
     //...
 }
 
 
 static void CppLinqFirstOrDefault(benchmark::State& state)
 {
-
     while (state.KeepRunning())
     {
         auto cnt = 0;
