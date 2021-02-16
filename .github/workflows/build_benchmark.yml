@@ -38,4 +38,10 @@ jobs:
     - name: Run tests
       shell: bash
       working-directory: ${{ runner.workspace }}/_build
-      run: ctest -C Release -V
+      run: ctest -C Release -V --parallel 1
+
+    - name: Save Log
+      uses: actions/upload-artifact@v2
+      with:
+        name: CMakeCache
+        path: ./CMakeCache.txt
