@@ -25,7 +25,7 @@ jobs:
     - name: create build environment
       run: |
         cmake -E make_directory ${{ runner.workspace }}/_build
-        cmake -E make_directory ${{ runner.workspace }}/CSV
+        cmake -E make_directory ${{ runner.workspace }}/Json
 
     - name: configure cmake
       shell: bash
@@ -39,8 +39,8 @@ jobs:
 
     - name: Run tests
       env:
-        BENCHMARK_OUT: ${{ runner.workspace }}/CSV/${{ matrix.os }}.CPP${{ matrix.version }}.csv
-        BENCHMARK_FORMAT: csv    
+        BENCHMARK_OUT: ${{ runner.workspace }}/Json/${{ matrix.os }}.CPP${{ matrix.version }}.json
+        BENCHMARK_FORMAT: json    
       shell: bash
       working-directory: ${{ runner.workspace }}/_build
       run: ctest -C Release -V --parallel 1
@@ -48,6 +48,6 @@ jobs:
     - name: Save Log
       uses: actions/upload-artifact@v2
       with:
-        name: CMakeCache
-        path: ${{ runner.workspace }}/CSV/${{ matrix.os }}.CPP${{ matrix.version }}.csv
+        name: ${{ matrix.os }}.CPP${{ matrix.version }}
+        path: ${{ runner.workspace }}/Json/${{ matrix.os }}.CPP${{ matrix.version }}.json
         retention-days: 1
