@@ -23,7 +23,6 @@ jobs:
         submodules: true
 
     - name: create build environment
-      shell: bash
       run: |
         cmake -E make_directory ${{ runner.workspace }}/_build
         cmake -E make_directory ${{ runner.workspace }}/CSV
