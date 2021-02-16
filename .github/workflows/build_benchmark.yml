@@ -7,7 +7,7 @@ env:
 
 jobs:
   build:
-    name: ${{ matrix.os }}.CPP${{ matrix.version }}.${{ matrix.build_type }}
+    name: ${{ matrix.os }}.CPP${{ matrix.version }}
     runs-on: ${{ matrix.os }}
     env:
       CMAKE_C_COMPILER: ${{ matrix.cc }})
@@ -18,7 +18,6 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        build_type: 'Release'
         version: ["17", "20"]
     steps:
     - uses: actions/checkout@v2
@@ -31,14 +30,14 @@ jobs:
     - name: configure cmake
       shell: bash
       working-directory: ${{ runner.workspace }}/_build
-      run: cmake -DBENCHMARK_ENABLE_TESTING=OFF -DBENCHMARK_DOWNLOAD_DEPENDENCIES=ON $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+      run: cmake -DBENCHMARK_ENABLE_TESTING=OFF -DBENCHMARK_DOWNLOAD_DEPENDENCIES=ON $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=Release
 
     - name: build
       shell: bash
       working-directory: ${{ runner.workspace }}/_build
-      run: cmake --build . --config ${{ matrix.build_type }}
+      run: cmake --build . --config Release
 
     - name: Run tests
       shell: bash
       working-directory: ${{ runner.workspace }}/_build
-      run: ctest -C ${{ matrix.build_type }}
+      run: ctest -C Release
