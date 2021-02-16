@@ -1,7 +1,5 @@
 name: CMake Benchmark
-
 on: [push, pull_request]
-
 env:
   IS_PERFORMANCE_TEST: TRUE
 
@@ -40,4 +38,4 @@ jobs:
     - name: Run tests
       shell: bash
       working-directory: ${{ runner.workspace }}/_build
-      run: ctest -C Release
+      run: ctest -C Release -V

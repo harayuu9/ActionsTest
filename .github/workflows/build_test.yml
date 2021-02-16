@@ -1,11 +1,5 @@
 name: CMake Test
-
 on: [push, pull_request]
-
-env:
-  CMAKE_VERSION: 3.18.3
-  NINJA_VERSION: 1.10.1
-  CCACHE_VERSION: 3.7.7
 
 jobs:
   build:
