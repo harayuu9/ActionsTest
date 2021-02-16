@@ -9,76 +9,14 @@ env:
 
 jobs:
   build:
-    name: ${{ matrix.config.name }}
-    runs-on: ${{ matrix.config.os }}
+    name: ${{ matrix.os }}.${{ matrix.version }}.${{ matrix.buildtype }}
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        config:
-        - {
-            name: "Windows MSVC-17 Debug",
-            os: windows-latest,
-            cc: "cl", cxx: "cl", version: "17", buildtype : "Debug",
-            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
-          }
-        - {
-            name: "Windows MSVC-17 Release",
-            os: windows-latest,
-            cc: "cl", cxx: "cl", version: "17", buildtype : "Release",
-            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
-          }
-        - {
-            name: "Windows MSVC-20 Debug",
-            os: windows-latest,
-            cc: "cl", cxx: "cl", version: "20", buildtype : "Debug",
-            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
-          }
-        - {
-            name: "Windows MSVC-20 Release",
-            os: windows-latest,
-            cc: "cl", cxx: "cl", version: "20", buildtype : "Release",
-            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
-          }
-        - {
-            name: "Ubuntu Latest GCC-17 Debug",
-            os: ubuntu-latest,
-            cc: "gcc", cxx: "g++", version: "17", buildtype : "Debug"
-          }
-        - {
-            name: "Ubuntu Latest GCC-17 Release",
-            os: ubuntu-latest,
-            cc: "gcc", cxx: "g++", version: "17", buildtype : "Release"
-          }
-        - {
-            name: "Ubuntu Latest GCC-20 Debug",
-            os: ubuntu-latest,
-            cc: "gcc", cxx: "g++", version: "20", buildtype : "Debug"
-          }
-        - {
-            name: "Ubuntu Latest GCC-20 Release",
-            os: ubuntu-latest,
-            cc: "gcc", cxx: "g++", version: "20", buildtype : "Release"
-          }
-        - {
-            name: "Ubuntu Latest Clang-17 Debug",
-            os: ubuntu-latest,
-            cc: "clang", cxx: "clang++", version: "17", buildtype : "Debug"
-          }
-        - {
-            name: "Ubuntu Latest Clang-17 Release",
-            os: ubuntu-latest,
-            cc: "clang", cxx: "clang++", version: "17", buildtype : "Release"
-          }
-        - {
-            name: "Ubuntu Latest Clang-20 Debug",
-            os: ubuntu-latest,
-            cc: "clang", cxx: "clang++", version: "20", buildtype : "Debug"
-          }
-        - {
-            name: "Ubuntu Latest Clang-20 Release",
-            os: ubuntu-latest,
-            cc: "clang", cxx: "clang++", version: "20", buildtype : "Release"
-          }
+        os: [ubuntu-latest, ubuntu-16.04, ubuntu-20.04, macos-latest, windows-latest]
+        build_type: ['Release', 'Debug']
+        version: ["17", "20"]
     steps:
     - uses: actions/checkout@v1
       with:
@@ -147,20 +85,18 @@ jobs:
       uses: actions/cache@v1.1.0
       with:
         path: .ccache
-        key: ${{ matrix.config.name }}-ccache-${{ steps.ccache_cache_timestamp.outputs.timestamp }}
+        key: ${{ runner.name }}-ccache-${{ steps.ccache_cache_timestamp.outputs.timestamp }}
         restore-keys: |
-          ${{ matrix.config.name }}-ccache-
+          ${{ runner.name }}-ccache-
 
     - name: Configure
       shell: cmake -P {0}
       run: |
-        set(ENV{CC} ${{ matrix.config.cc }})
-        set(ENV{CXX} ${{ matrix.config.cxx }})
-        set(ENV{CPP_VERSION} ${{ matrix.config.version }})
+        set(ENV{CPP_VERSION} ${{ matrix.version }})
 
-        if ("${{ runner.os }}" STREQUAL "Windows" AND NOT "x${{ matrix.config.environment_script }}" STREQUAL "x")
+        if ("${{ runner.os }}" STREQUAL "Windows")
           execute_process(
-            COMMAND "${{ matrix.config.environment_script }}" && set
+            COMMAND "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat" && set
             OUTPUT_FILE environment_script_output.txt
           )
           file(STRINGS environment_script_output.txt output_lines)
@@ -181,7 +117,7 @@ jobs:
           COMMAND cmake
             -S .
             -B build
-            -D CMAKE_BUILD_TYPE=${{ matrix.config.buildtype }}
+            -D CMAKE_BUILD_TYPE=${{ matrix.buildtype }}
             -G Ninja
             -D CMAKE_MAKE_PROGRAM=ninja
             -D CMAKE_C_COMPILER_LAUNCHER=ccache
@@ -197,7 +133,7 @@ jobs:
       run: |
         set(ENV{NINJA_STATUS} "[%f/%t %o/sec] ")
 
-        if ("${{ runner.os }}" STREQUAL "Windows" AND NOT "x${{ matrix.config.environment_script }}" STREQUAL "x")
+        if ("${{ runner.os }}" STREQUAL "Windows")
           file(STRINGS environment_script_output.txt output_lines)
           foreach(line IN LISTS output_lines)
             if (line MATCHES "^([a-zA-Z0-9_-]+)=(.*)$")
@@ -212,7 +148,7 @@ jobs:
         set(ENV{CCACHE_COMPRESS} "true")
         set(ENV{CCACHE_COMPRESSLEVEL} "6")
         set(ENV{CCACHE_MAXSIZE} "400M")
-        if ("${{ matrix.config.cxx }}" STREQUAL "cl")
+        if ("${{ matrix.cxx }}" STREQUAL "cl")
           set(ENV{CCACHE_MAXSIZE} "600M")
         endif()
 
