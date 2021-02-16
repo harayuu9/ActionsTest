@@ -90,7 +90,7 @@ jobs:
         submodules: true
 
     - name: create build environment
-      run: cmake -E make_directory
+      run: cmake -E make_directory ${{ runner.workspace }}/_build
 
     - name: configure cmake
       shell: bash
@@ -104,5 +104,5 @@ jobs:
 
     - name: Run tests
       shell: bash
-      working-directory: ${{ runner.workspace }}/build
+      working-directory: ${{ runner.workspace }}/_build
       run: ctest -C ${{ matrix.config.build_type }}
