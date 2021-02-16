@@ -9,81 +9,19 @@ env:
 
 jobs:
   build:
-    name: ${{ matrix.config.name }}
-    runs-on: ${{ matrix.config.os }}
+    name: ${{ matrix.os }}.CPP${{ matrix.version }}.${{ matrix.build_type }}
+    runs-on: ${{ matrix.os }}
     env:
-      CMAKE_C_COMPILER: ${{ matrix.config.cc }})
-      CMAKE_CXX_COMPILER: ${{ matrix.config.cxx }})
-      CPP_VERSION: ${{ matrix.config.version }})
+      CMAKE_C_COMPILER: ${{ matrix.cc }})
+      CMAKE_CXX_COMPILER: ${{ matrix.cxx }})
+      CPP_VERSION: ${{ matrix.version }})
 
     strategy:
       fail-fast: false
       matrix:
-        config:
-        - {
-            name: "Windows MSVC-17 Debug",
-            os: windows-latest,
-            cc: "cl", cxx: "cl", version: "17", buildtype : "Debug",
-            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
-          }
-        - {
-            name: "Windows MSVC-17 Release",
-            os: windows-latest,
-            cc: "cl", cxx: "cl", version: "17", buildtype : "Release",
-            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
-          }
-        - {
-            name: "Windows MSVC-20 Debug",
-            os: windows-latest,
-            cc: "cl", cxx: "cl", version: "20", buildtype : "Debug",
-            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
-          }
-        - {
-            name: "Windows MSVC-20 Release",
-            os: windows-latest,
-            cc: "cl", cxx: "cl", version: "20", buildtype : "Release",
-            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
-          }
-        - {
-            name: "Ubuntu Latest GCC-17 Debug",
-            os: ubuntu-latest,
-            cc: "gcc", cxx: "g++", version: "17", buildtype : "Debug"
-          }
-        - {
-            name: "Ubuntu Latest GCC-17 Release",
-            os: ubuntu-latest,
-            cc: "gcc", cxx: "g++", version: "17", buildtype : "Release"
-          }
-        - {
-            name: "Ubuntu Latest GCC-20 Debug",
-            os: ubuntu-latest,
-            cc: "gcc", cxx: "g++", version: "20", buildtype : "Debug"
-          }
-        - {
-            name: "Ubuntu Latest GCC-20 Release",
-            os: ubuntu-latest,
-            cc: "gcc", cxx: "g++", version: "20", buildtype : "Release"
-          }
-        - {
-            name: "Ubuntu Latest Clang-17 Debug",
-            os: ubuntu-latest,
-            cc: "clang", cxx: "clang++", version: "17", buildtype : "Debug"
-          }
-        - {
-            name: "Ubuntu Latest Clang-17 Release",
-            os: ubuntu-latest,
-            cc: "clang", cxx: "clang++", version: "17", buildtype : "Release"
-          }
-        - {
-            name: "Ubuntu Latest Clang-20 Debug",
-            os: ubuntu-latest,
-            cc: "clang", cxx: "clang++", version: "20", buildtype : "Debug"
-          }
-        - {
-            name: "Ubuntu Latest Clang-20 Release",
-            os: ubuntu-latest,
-            cc: "clang", cxx: "clang++", version: "20", buildtype : "Release"
-          }
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        build_type: ['Release', 'Debug']
+        version: ["17", "20"]
     steps:
     - uses: actions/checkout@v1
       with:
@@ -95,14 +33,14 @@ jobs:
     - name: configure cmake
       shell: bash
       working-directory: ${{ runner.workspace }}/_build
-      run: cmake -DBENCHMARK_ENABLE_TESTING=OFF -DBENCHMARK_DOWNLOAD_DEPENDENCIES=ON $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }}
+      run: cmake -DBENCHMARK_ENABLE_TESTING=OFF -DBENCHMARK_DOWNLOAD_DEPENDENCIES=ON $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
 
     - name: build
       shell: bash
       working-directory: ${{ runner.workspace }}/_build
-      run: cmake --build . --config ${{ matrix.config.build_type }}
+      run: cmake --build . --config ${{ matrix.build_type }}
 
     - name: Run tests
       shell: bash
       working-directory: ${{ runner.workspace }}/_build
-      run: ctest -C ${{ matrix.config.build_type }}
+      run: ctest -C ${{ matrix.build_type }}
