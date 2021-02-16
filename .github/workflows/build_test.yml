@@ -11,6 +11,11 @@ jobs:
   build:
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
+    env:
+      CC: ${{ matrix.config.cc }})
+      CXX: ${{ matrix.config.cxx }})
+      CPP_VERSION: ${{ matrix.config.version }})
+
     strategy:
       fail-fast: false
       matrix:
@@ -80,11 +85,6 @@ jobs:
             cc: "clang", cxx: "clang++", version: "20", buildtype : "Release"
           }
     steps:
-    - env:
-        CC ${{ matrix.config.cc }})
-        CXX ${{ matrix.config.cxx }})
-        CPP_VERSION ${{ matrix.config.version }})
-
     - uses: actions/checkout@v1
       with:
         submodules: true
