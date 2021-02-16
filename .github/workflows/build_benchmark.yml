@@ -25,8 +25,8 @@ jobs:
     - name: create build environment
       shell: bash
       run: |
-      mkdir _build
-      mkdir CSV
+        cmake -E make_directory ${{ runner.workspace }}/_build
+        cmake -E make_directory ${{ runner.workspace }}/CSV
 
     - name: configure cmake
       shell: bash
