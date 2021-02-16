@@ -8,8 +8,8 @@ ExternalProject_Add(googlebenchmark
   GIT_TAG           master
   SOURCE_DIR        "${CMAKE_CURRENT_BINARY_DIR}/googlebenchmark-src"
   BINARY_DIR        "${CMAKE_CURRENT_BINARY_DIR}/googlebenchmark-build"
-  CONFIGURE_COMMAND ""
-  BUILD_COMMAND     "" 
+  CONFIGURE_COMMAND "${CMAKE_COMMAND}" -B ${CMAKE_CURRENT_BINARY_DIR}/googlebenchmark-build -S ${CMAKE_CURRENT_BINARY_DIR}/googlebenchmark-src -DBENCHMARK_DOWNLOAD_DEPENDENCIES=ON
+  BUILD_COMMAND     "${CMAKE_COMMAND}" --build ${CMAKE_CURRENT_BINARY_DIR}/googlebenchmark-build --config Release 
   INSTALL_COMMAND   ""
   TEST_COMMAND      ""
 )
