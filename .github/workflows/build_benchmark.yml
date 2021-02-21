@@ -31,6 +31,13 @@ jobs:
         cmake -E make_directory ${{ runner.workspace }}/_build
         cmake -E make_directory ${{ runner.workspace }}/Json
 
+    - name: Cache
+      id: cache-primes
+      uses: actions/cache@v2
+      with:
+        path: _build
+        key: bench--${{ matrix.os }}--CPP${{ matrix.version }}
+
     - name: configure cmake
       shell: bash
       working-directory: ${{ runner.workspace }}/_build

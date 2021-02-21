@@ -28,6 +28,13 @@ jobs:
     - name: create build environment
       run: cmake -E make_directory ${{ runner.workspace }}/_build
 
+    - name: Cache
+      id: cache-primes
+      uses: actions/cache@v2
+      with:
+        path: _build
+        key: test--${{ matrix.os }}--CPP${{ matrix.version }}--${{ matrix.build_type }}
+
     - name: configure cmake
       shell: bash
       working-directory: ${{ runner.workspace }}/_build
