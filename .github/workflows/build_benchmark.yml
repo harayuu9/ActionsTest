@@ -60,8 +60,8 @@ jobs:
       with:
         submodule: TRUE
 
-    - name: create upload directory
     - uses: FranzDiebold/github-env-vars-action@v1.2.1
+    - name: create upload directory
       run: |
         cmake -E cmake -E make_directory ${{ runner.workspace }}/docs/log
         cmake -E cmake -E make_directory ${{ runner.workspace }}/docs/log/${{ CI_RUN_NUMBER }}
