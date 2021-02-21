@@ -1,5 +1,9 @@
 name: CMake Benchmark
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - ".github/workflows/build_benchmark.yml"
+      - "project/**"
 env:
   IS_PERFORMANCE_TEST: TRUE
 
@@ -30,7 +34,7 @@ jobs:
     - name: configure cmake
       shell: bash
       working-directory: ${{ runner.workspace }}/_build
-      run: cmake -DBENCHMARK_ENABLE_TESTING=OFF -DBENCHMARK_DOWNLOAD_DEPENDENCIES=ON $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=Release
+      run: cmake -DBENCHMARK_ENABLE_TESTING=OFF -DBENCHMARK_DOWNLOAD_DEPENDENCIES=ON $GITHUB_WORKSPACE/project -DCMAKE_BUILD_TYPE=Release
 
     - name: build
       shell: bash
