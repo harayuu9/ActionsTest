@@ -61,9 +61,22 @@ jobs:
         submodule: TRUE
 
     - uses: FranzDiebold/github-env-vars-action@v1.2.1
+    - name: Print environment variables
       run: |
-        cmake -E cmake -E make_directory ${{ runner.workspace }}/docs/log
-        cmake -E cmake -E make_directory ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER
+        echo "GITHUB_REPOSITORY_SLUG=$GITHUB_REPOSITORY_SLUG"
+        echo "GITHUB_REPOSITORY_OWNER=$GITHUB_REPOSITORY_OWNER"
+        echo "GITHUB_REPOSITORY_OWNER_SLUG=$GITHUB_REPOSITORY_OWNER_SLUG"
+        echo "GITHUB_REPOSITORY_NAME=$GITHUB_REPOSITORY_NAME"
+        echo "GITHUB_REPOSITORY_NAME_SLUG=$GITHUB_REPOSITORY_NAME_SLUG"
+        echo "GITHUB_REF_SLUG=$GITHUB_REF_SLUG"
+        echo "GITHUB_REF_NAME=$GITHUB_REF_NAME"
+        echo "GITHUB_REF_NAME_SLUG=$GITHUB_REF_NAME_SLUG"
+        echo "GITHUB_SHA_SHORT=$GITHUB_SHA_SHORT"
+
+    # - uses: FranzDiebold/github-env-vars-action@v1.2.1
+    #   run: |
+    #     cmake -E cmake -E make_directory ${{ runner.workspace }}/docs/log
+    #     cmake -E cmake -E make_directory ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER
 
     # - name: setup artifact
     #   uses: actions/download-artifact@v2
