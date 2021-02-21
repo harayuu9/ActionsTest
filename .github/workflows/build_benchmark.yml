@@ -68,8 +68,7 @@ jobs:
     - name: setup artifact
       uses: actions/download-artifact@v2
       with:
-        name: windows-latest.CPP20
-        path: ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER/windows-latest.CPP20.json
+        path: ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER
 
     - name: result artifact upload
       uses: actions/upload-artifact@v2
