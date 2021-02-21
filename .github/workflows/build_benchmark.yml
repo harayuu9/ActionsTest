@@ -63,8 +63,7 @@ jobs:
     - uses: FranzDiebold/github-env-vars-action@v1.2.1
     - name: Print environment variables
       run: |
-        cmake -E cmake -E make_directory ${{ runner.workspace }}/docs/log
-        cmake -E cmake -E make_directory ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER
+        mkdir -p make_directory ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER
 
     - name: setup artifact
       uses: actions/download-artifact@v2
