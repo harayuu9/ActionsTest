@@ -74,7 +74,7 @@ jobs:
     #     path: ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER/windows-latest.CPP20.json
 
     - name: result artifact upload
-    - uses: actions/upload-artifact@2
+    - uses: actions/upload-artifact@v2
       with:
         name: result
         path: ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER
