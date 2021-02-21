@@ -64,7 +64,7 @@ jobs:
     - name: create upload directory
       run: |
         cmake -E cmake -E make_directory ${{ runner.workspace }}/docs/log
-        cmake -E cmake -E make_directory ${{ runner.workspace }}/docs/log/${{ CI_RUN_NUMBER }}
+        cmake -E cmake -E make_directory ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER
 
     # - name: setup artifact
     # - uses: FranzDiebold/github-env-vars-action@v1.2.1
