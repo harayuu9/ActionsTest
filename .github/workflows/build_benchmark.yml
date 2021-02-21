@@ -50,4 +50,28 @@ jobs:
       with:
         name: ${{ matrix.os }}.CPP${{ matrix.version }}
         path: ${{ runner.workspace }}/Json/${{ matrix.os }}.CPP${{ matrix.version }}.json
-        retention-days: 1
+  push results:
+    name: push result
+    runs-on: ubuntu-latest
+    step:
+      - uses: actions/checkout@v2
+        with:
+          submodule: TRUE
+
+      - uses: FranzDiebold/github-env-vars-action@v1.2.1
+      - name: create upload directory
+        run: |
+          cmake -E cmake -E make_directory ${{ runner.workspace }}/docs/log
+          cmake -E cmake -E make_directory ${{ runner.workspace }}/docs/log/${{ CI_RUN_NUMBER }}
+
+      - name: setup artifact
+      - uses: actions/download-artifact@v2
+        with:
+          name: windows-latest.CPP20
+          path: ${{ runner.workspace }}/docs/log/${{ CI_RUN_NUMBER }}/windows-latest.CPP20.json
+
+      - name: result artifact upload
+      - uses: actions/upload-artifact@2
+        with:
+          name: result
+          path: ${{ runner.workspace }}/docs/log/${{ CI_RUN_NUMBER }}
