@@ -66,15 +66,15 @@ jobs:
         cmake -E cmake -E make_directory ${{ runner.workspace }}/docs/log
         cmake -E cmake -E make_directory ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER
 
-    - name: setup artifact
-      uses: FranzDiebold/github-env-vars-action@v1.2.1
-      uses: actions/download-artifact@v2
-      with:
-        name: windows-latest.CPP20
-        path: ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER/windows-latest.CPP20.json
+    # - name: setup artifact
+    #   uses: FranzDiebold/github-env-vars-action@v1.2.1
+    #   uses: actions/download-artifact@v2
+    #   with:
+    #     name: windows-latest.CPP20
+    #     path: ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER/windows-latest.CPP20.json
 
-    - name: result artifact upload
-      uses: actions/upload-artifact@v2
-      with:
-        name: result
-        path: ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER
+    # - name: result artifact upload
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: result
+    #     path: ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER
