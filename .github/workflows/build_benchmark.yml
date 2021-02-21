@@ -50,7 +50,7 @@ jobs:
       with:
         name: ${{ matrix.os }}.CPP${{ matrix.version }}
         path: ${{ runner.workspace }}/Json/${{ matrix.os }}.CPP${{ matrix.version }}.json
-  push results:
+  results:
     name: push result
     runs-on: ubuntu-latest
     step:
