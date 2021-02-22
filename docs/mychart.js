@@ -44,7 +44,7 @@ function main() {
     // req.send(null);
 
     var req = new XMLHttpRequest();
-    var filePath = "https://raw.githubusercontent.com/harayuu9/ActionsTest/main/docs/result/windows-latest.CPP20/windows-latest.CPP20.json";
+    var filePath = "https://raw.githubusercontent.com/harayuu9/ActionsTest/main/docs/Json/windows-latest.CPP20.json";
     req.open("GET", filePath, true);
     req.onload = function() {
         var data = [];
