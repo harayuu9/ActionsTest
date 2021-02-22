@@ -1,7 +1,7 @@
 {
   "context": {
-    "date": "2021-02-22T03:10:52+00:00",
-    "host_name": "Mac-1613963265644.local",
+    "date": "2021-02-22T03:19:19+00:00",
+    "host_name": "Mac-1613963830321.local",
     "executable": "/Users/runner/work/ActionsTest/ActionsTest/build/main",
     "num_cpus": 3,
     "mhz_per_cpu": 3337,
@@ -32,7 +32,7 @@
         "num_sharing": 3
       }
     ],
-    "load_avg": [3.58545,3.18457,1.47168],
+    "load_avg": [6.10059,3.92188,1.67432],
     "library_build_type": "release"
   },
   "benchmarks": [
@@ -44,8 +44,8 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1000000000,
-      "real_time": 2.8685823600000049e-01,
-      "cpu_time": 2.8633099999999995e-01,
+      "real_time": 2.7891883999998868e-01,
+      "cpu_time": 2.7755800000000003e-01,
       "time_unit": "ns"
     }
   ]
