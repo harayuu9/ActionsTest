@@ -65,7 +65,7 @@ jobs:
         git add .
         git commit -m "add benchmark result" -a
         git pull
-        git push origin master
+        git push origin main
 
     - name: Save Log
       uses: actions/upload-artifact@v2
