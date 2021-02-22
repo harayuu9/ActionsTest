@@ -11,11 +11,10 @@ function csv2Array(str) {
 
 function drawBarChart(data) {
     // 3)chart.jsのdataset用の配列を用意
-    var tmpLabels = [], tmpData1 = [], tmpData2 = [];
+    var tmpLabels = [], tmpData1 = [];
     for (var row in data) {
-        tmpLabels.push(data[row][0]);
-        tmpData1.push(data[row][1]);
-        tmpData2.push(data[row][2]);
+        tmpLabels.push(data[row].name);
+        tmpData1.push(data[row].time);
     };
 
     // 4)chart.jsで描画
@@ -26,7 +25,6 @@ function drawBarChart(data) {
             labels: tmpLabels,
             datasets: [
                 { label: "Tokyo", data: tmpData1, backgroundColor: "red" },
-                { label: "Osaka", data: tmpData2, backgroundColor: "blue" }
             ]
         }
     });
@@ -35,7 +33,7 @@ function drawBarChart(data) {
 function main() {
     // // 1) ajaxでCSVファイルをロード
     // var req = new XMLHttpRequest();
-    // var filePath = "data.csv";
+    // var filePath = "https://raw.githubusercontent.com/harayuu9/ActionsTest/main/docs/data.csv";
     // req.open("GET", filePath, true);
     // req.onload = function () {
     //     // 2) CSVデータ変換の呼び出し
@@ -45,10 +43,20 @@ function main() {
     // };
     // req.send(null);
 
-    const obj = JSON.parse(json);
-    document.writeln("aaa");
-    document.writeln(obj.benchmark);
-
+    var req = new XMLHttpRequest();
+    var filePath = "https://raw.githubusercontent.com/harayuu9/ActionsTest/main/docs/result/windows-latest.CPP20/windows-latest.CPP20.json";
+    req.open("GET", filePath, true);
+    req.onload = function() {
+        var data = [];
+        const obj = JSON.parse(req.responseText);
+        obj.benchmarks.map(benchmark => 
+            {
+                data.push({name: benchmark.name, time: benchmark.real_time});
+            });
+        drawBarChart(data);
+    };
+    req.send(null);
+    console.log("aaa");
 }
 
 main();

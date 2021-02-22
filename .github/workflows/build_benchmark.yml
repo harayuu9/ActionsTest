@@ -29,7 +29,7 @@ jobs:
     - name: create build environment
       run: |
         cmake -E make_directory ${{ runner.workspace }}/_build
-        cmake -E make_directory ${{ runner.workspace }}/Json
+        cmake -E make_directory ${{ runner.workspace }}/docs/Json
 
     - name: Cache
       id: cache-primes
@@ -50,17 +50,28 @@ jobs:
 
     - name: Run tests
       env:
-        BENCHMARK_OUT: ${{ runner.workspace }}/Json/${{ matrix.os }}.CPP${{ matrix.version }}.json
+        BENCHMARK_OUT: ${{ runner.workspace }}/docs/Json/${{ matrix.os }}.CPP${{ matrix.version }}.json
         BENCHMARK_FORMAT: json    
       shell: bash
       working-directory: ${{ runner.workspace }}/_build
       run: ctest -C Release -V --parallel 1
 
+    - name: git setting
+      run: |
+        git config --local user.email "actions@github.com"
+        git config --local user.name "actions"
+    - name: Commit files
+      run: |
+        git add .
+        git commit -m "add benchmark result" -a
+        git pull
+        git push origin master
+
     - name: Save Log
       uses: actions/upload-artifact@v2
       with:
         name: ${{ matrix.os }}.CPP${{ matrix.version }}
-        path: ${{ runner.workspace }}/Json/${{ matrix.os }}.CPP${{ matrix.version }}.json
+        path: ${{ runner.workspace }}/docs/Json/${{ matrix.os }}.CPP${{ matrix.version }}.json
   
   results:
     name: push result
