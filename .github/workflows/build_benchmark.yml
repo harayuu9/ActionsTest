@@ -56,6 +56,7 @@ jobs:
         dir
         cd Json
         dir
+        echo ${{ runner.workspace }}/docs/Json/${{ matrix.os }}.CPP${{ matrix.version }}.json
 
     - name: Commit files
       run: |
