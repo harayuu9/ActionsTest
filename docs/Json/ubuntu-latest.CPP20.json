@@ -1,7 +1,7 @@
 {
   "context": {
-    "date": "2021-02-22T03:10:23+00:00",
-    "host_name": "fv-az63-882",
+    "date": "2021-02-22T03:18:59+00:00",
+    "host_name": "fv-az95-965",
     "executable": "/home/runner/work/ActionsTest/ActionsTest/build/main",
     "num_cpus": 2,
     "mhz_per_cpu": 2095,
@@ -32,7 +32,7 @@
         "num_sharing": 2
       }
     ],
-    "load_avg": [1.26,0.5,0.19],
+    "load_avg": [0.81,0.51,0.21],
     "library_build_type": "release"
   },
   "benchmarks": [
@@ -44,8 +44,8 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1000000000,
-      "real_time": 3.9759389199998907e-01,
-      "cpu_time": 3.9756428300000002e-01,
+      "real_time": 3.9495908399999280e-01,
+      "cpu_time": 3.9259111099999999e-01,
       "time_unit": "ns"
     }
   ]
