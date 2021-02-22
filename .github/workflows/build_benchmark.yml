@@ -29,7 +29,7 @@ jobs:
     - name: create build environment
       run: |
         cmake -E make_directory ${{ runner.workspace }}/_build
-        cmake -E make_directory ${{ runner.workspace }}/docs/Json
+        cmake -E make_directory ${{ runner.workspace }}/../docs/Json
 
     - name: configure cmake
       shell: bash
@@ -43,22 +43,11 @@ jobs:
 
     - name: Run tests
       env:
-        BENCHMARK_OUT: ${{ runner.workspace }}/docs/Json/${{ matrix.os }}.CPP${{ matrix.version }}.json
+        BENCHMARK_OUT: ${{ runner.workspace }}/../docs/Json/${{ matrix.os }}.CPP${{ matrix.version }}.json
         BENCHMARK_FORMAT: json    
       shell: bash
       working-directory: ${{ runner.workspace }}/_build
       run: ctest -C Release -V --parallel 1
-
-    - name: Show Dir
-      run: |
-        dir
-        cd docs
-        dir
-        cd Json
-        dir
-        echo ${{ runner.workspace }}/docs/Json/${{ matrix.os }}.CPP${{ matrix.version }}.json
-        pwd
-        basename `pwd`
 
     - name: Commit files
       run: |
@@ -67,33 +56,33 @@ jobs:
         git add .
         git commit -m 'add benchmark result' && git push origin main
 
-    - name: Save Log
-      uses: actions/upload-artifact@v2
-      with:
-        name: ${{ matrix.os }}.CPP${{ matrix.version }}
-        path: ${{ runner.workspace }}/docs/Json/${{ matrix.os }}.CPP${{ matrix.version }}.json
+  #   - name: Save Log
+  #     uses: actions/upload-artifact@v2
+  #     with:
+  #       name: ${{ matrix.os }}.CPP${{ matrix.version }}
+  #       path: ${{ runner.workspace }}/docs/Json/${{ matrix.os }}.CPP${{ matrix.version }}.json
   
-  results:
-    name: push result
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodule: TRUE
+  # results:
+  #   name: push result
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #     with:
+  #       submodule: TRUE
 
-    - uses: FranzDiebold/github-env-vars-action@v1.2.1
-    - name: Print environment variables
-      run: |
-        mkdir -p make_directory ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER
+  #   - uses: FranzDiebold/github-env-vars-action@v1.2.1
+  #   - name: Print environment variables
+  #     run: |
+  #       mkdir -p make_directory ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER
 
-    - name: setup artifact
-      uses: actions/download-artifact@v2
-      with:
-        path: ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER
+  #   - name: setup artifact
+  #     uses: actions/download-artifact@v2
+  #     with:
+  #       path: ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER
 
-    - name: result artifact upload
-      uses: actions/upload-artifact@v2
-      with:
-        name: result
-        path: ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER
+  #   - name: result artifact upload
+  #     uses: actions/upload-artifact@v2
+  #     with:
+  #       name: result
+  #       path: ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER
