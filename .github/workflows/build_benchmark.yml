@@ -28,25 +28,25 @@ jobs:
 
     - name: create build environment
       run: |
-        cmake -E make_directory ${{ runner.workspace }}/_build
-        cmake -E make_directory ${{ runner.workspace }}/../docs/Json
+        cmake -E make_directory build
+        cmake -E make_directory docs/Json
 
     - name: configure cmake
       shell: bash
-      working-directory: ${{ runner.workspace }}/_build
-      run: cmake -DBENCHMARK_ENABLE_TESTING=OFF -DBENCHMARK_DOWNLOAD_DEPENDENCIES=ON $GITHUB_WORKSPACE/project -DCMAKE_BUILD_TYPE=Release
+      working-directory: build
+      run: cmake -DBENCHMARK_ENABLE_TESTING=OFF -DBENCHMARK_DOWNLOAD_DEPENDENCIES=ON ../project -DCMAKE_BUILD_TYPE=Release
 
     - name: build
       shell: bash
-      working-directory: ${{ runner.workspace }}/_build
+      working-directory: build
       run: cmake --build . --config Release
 
     - name: Run tests
       env:
-        BENCHMARK_OUT: ${{ runner.workspace }}/../docs/Json/${{ matrix.os }}.CPP${{ matrix.version }}.json
+        BENCHMARK_OUT: ../docs/Json/${{ matrix.os }}.CPP${{ matrix.version }}.json
         BENCHMARK_FORMAT: json    
       shell: bash
-      working-directory: ${{ runner.workspace }}/_build
+      working-directory: build
       run: ctest -C Release -V --parallel 1
 
     - name: Commit files
