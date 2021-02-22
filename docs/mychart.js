@@ -1,4 +1,4 @@
-// 2) CSV‚©‚ç‚QŸŒ³”z—ñ‚É•ÏŠ·
+ï»¿// 2) CSVã‹ã‚‰ï¼’æ¬¡å…ƒé…åˆ—ã«å¤‰æ›
 function csv2Array(str) {
     var csvData = [];
     var lines = str.split("\n");
@@ -10,7 +10,7 @@ function csv2Array(str) {
 }
 
 function drawBarChart(data) {
-    // 3)chart.js‚Ìdataset—p‚Ì”z—ñ‚ğ—pˆÓ
+    // 3)chart.jsã®datasetç”¨ã®é…åˆ—ã‚’ç”¨æ„
     var tmpLabels = [], tmpData1 = [], tmpData2 = [];
     for (var row in data) {
         tmpLabels.push(data[row][0]);
@@ -18,7 +18,7 @@ function drawBarChart(data) {
         tmpData2.push(data[row][2]);
     };
 
-    // 4)chart.js‚Å•`‰æ
+    // 4)chart.jsã§æç”»
     var ctx = document.getElementById("myChart").getContext("2d");
     var myChart = new Chart(ctx, {
         type: "bar",
@@ -33,17 +33,22 @@ function drawBarChart(data) {
 }
 
 function main() {
-    // 1) ajax‚ÅCSVƒtƒ@ƒCƒ‹‚ğƒ[ƒh
-    var req = new XMLHttpRequest();
-    var filePath = "data.csv";
-    req.open("GET", filePath, true);
-    req.onload = function () {
-        // 2) CSVƒf[ƒ^•ÏŠ·‚ÌŒÄ‚Ño‚µ
-        data = csv2Array(req.responseText);
-        // 3) chart.jsƒf[ƒ^€”õA4) chart.js•`‰æ‚ÌŒÄ‚Ño‚µ
-        drawBarChart(data);
-    };
-    req.send(null);
+    // // 1) ajaxã§CSVãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ­ãƒ¼ãƒ‰
+    // var req = new XMLHttpRequest();
+    // var filePath = "data.csv";
+    // req.open("GET", filePath, true);
+    // req.onload = function () {
+    //     // 2) CSVãƒ‡ãƒ¼ã‚¿å¤‰æ›ã®å‘¼ã³å‡ºã—
+    //     data = csv2Array(req.responseText);
+    //     // 3) chart.jsãƒ‡ãƒ¼ã‚¿æº–å‚™ã€4) chart.jsæç”»ã®å‘¼ã³å‡ºã—
+    //     drawBarChart(data);
+    // };
+    // req.send(null);
+
+    const obj = JSON.parse(json);
+    document.writeln("aaa");
+    document.writeln(obj.benchmark);
+
 }
 
 main();

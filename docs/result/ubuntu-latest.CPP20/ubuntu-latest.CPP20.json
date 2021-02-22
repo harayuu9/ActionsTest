@@ -1,0 +1,52 @@
+{
+  "context": {
+    "date": "2021-02-21T23:46:21+00:00",
+    "host_name": "fv-az59-575",
+    "executable": "/home/runner/work/ActionsTest/_build/main",
+    "num_cpus": 2,
+    "mhz_per_cpu": 2095,
+    "cpu_scaling_enabled": false,
+    "caches": [
+      {
+        "type": "Data",
+        "level": 1,
+        "size": 32768,
+        "num_sharing": 1
+      },
+      {
+        "type": "Instruction",
+        "level": 1,
+        "size": 32768,
+        "num_sharing": 1
+      },
+      {
+        "type": "Unified",
+        "level": 2,
+        "size": 1048576,
+        "num_sharing": 1
+      },
+      {
+        "type": "Unified",
+        "level": 3,
+        "size": 37486592,
+        "num_sharing": 2
+      }
+    ],
+    "load_avg": [0.87,0.53,0.22],
+    "library_build_type": "release"
+  },
+  "benchmarks": [
+    {
+      "name": "CppLinqFirstOrDefault",
+      "run_name": "CppLinqFirstOrDefault",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1000000000,
+      "real_time": 3.6181348399998114e-01,
+      "cpu_time": 3.6166880100000004e-01,
+      "time_unit": "ns"
+    }
+  ]
+}
