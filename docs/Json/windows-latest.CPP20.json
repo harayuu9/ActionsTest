@@ -1,10 +1,10 @@
 {
   "context": {
-    "date": "2021-02-22T03:19:52+00:00",
-    "host_name": "fv-az28-358",
+    "date": "2021-02-22T03:29:36+00:00",
+    "host_name": "fv-az45-167",
     "executable": "D:/a/ActionsTest/ActionsTest/build/Release/main.exe",
     "num_cpus": 2,
-    "mhz_per_cpu": 2295,
+    "mhz_per_cpu": 2397,
     "caches": [
       {
         "type": "Data",
@@ -27,7 +27,7 @@
       {
         "type": "Unified",
         "level": 3,
-        "size": 52428800,
+        "size": 31457280,
         "num_sharing": 2
       }
     ],
@@ -42,9 +42,21 @@
       "repetitions": 0,
       "repetition_index": 0,
       "threads": 1,
-      "iterations": 1000000000,
-      "real_time": 7.1422880000000066e-01,
-      "cpu_time": 7.1875000000000000e-01,
+      "iterations": 896000000,
+      "real_time": 8.7939899553595469e-01,
+      "cpu_time": 8.7193080357142860e-01,
+      "time_unit": "ns"
+    },
+    {
+      "name": "NativeFirstOrDefault",
+      "run_name": "NativeFirstOrDefault",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 896000000,
+      "real_time": 8.6098236607108036e-01,
+      "cpu_time": 8.5449218750000000e-01,
       "time_unit": "ns"
     }
   ]
