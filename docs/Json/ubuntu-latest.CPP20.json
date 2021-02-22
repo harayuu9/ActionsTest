@@ -1,10 +1,10 @@
 {
   "context": {
-    "date": "2021-02-22T03:18:59+00:00",
-    "host_name": "fv-az95-965",
+    "date": "2021-02-22T03:28:55+00:00",
+    "host_name": "fv-az92-641",
     "executable": "/home/runner/work/ActionsTest/ActionsTest/build/main",
     "num_cpus": 2,
-    "mhz_per_cpu": 2095,
+    "mhz_per_cpu": 2295,
     "cpu_scaling_enabled": false,
     "caches": [
       {
@@ -22,17 +22,17 @@
       {
         "type": "Unified",
         "level": 2,
-        "size": 1048576,
+        "size": 262144,
         "num_sharing": 1
       },
       {
         "type": "Unified",
         "level": 3,
-        "size": 37486592,
+        "size": 52428800,
         "num_sharing": 2
       }
     ],
-    "load_avg": [0.81,0.51,0.21],
+    "load_avg": [0.96,0.73,0.32],
     "library_build_type": "release"
   },
   "benchmarks": [
@@ -44,8 +44,20 @@
       "repetition_index": 0,
       "threads": 1,
       "iterations": 1000000000,
-      "real_time": 3.9495908399999280e-01,
-      "cpu_time": 3.9259111099999999e-01,
+      "real_time": 3.8559524999999439e-01,
+      "cpu_time": 3.8548615300000000e-01,
+      "time_unit": "ns"
+    },
+    {
+      "name": "NativeFirstOrDefault",
+      "run_name": "NativeFirstOrDefault",
+      "run_type": "iteration",
+      "repetitions": 0,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 1000000000,
+      "real_time": 3.8541194800001222e-01,
+      "cpu_time": 3.8519854799999997e-01,
       "time_unit": "ns"
     }
   ]
