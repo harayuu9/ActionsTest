@@ -85,6 +85,10 @@ jobs:
       with:
         path: ${{ runner.workspace }}/docs/log/$CI_RUN_NUMBER
 
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: add benchmark result
+
     - name: result artifact upload
       uses: actions/upload-artifact@v2
       with:
