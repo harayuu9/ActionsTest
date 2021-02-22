@@ -31,13 +31,6 @@ jobs:
         cmake -E make_directory ${{ runner.workspace }}/_build
         cmake -E make_directory ${{ runner.workspace }}/docs/Json
 
-    - name: Cache
-      id: cache-primes
-      uses: actions/cache@v2
-      with:
-        path: _build
-        key: bench--${{ matrix.os }}--CPP${{ matrix.version }}
-
     - name: configure cmake
       shell: bash
       working-directory: ${{ runner.workspace }}/_build
@@ -56,16 +49,12 @@ jobs:
       working-directory: ${{ runner.workspace }}/_build
       run: ctest -C Release -V --parallel 1
 
-    - name: git setting
-      run: |
-        git config --local user.email "actions@github.com"
-        git config --local user.name "actions"
     - name: Commit files
       run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "actions"
         git add .
-        git commit -m "add benchmark result" -a
-        git pull
-        git push origin main
+        git commit -m 'add benchmark result' && git push ${REPO} HEAD:${{github.event.pull_request.head.ref}} || true
 
     - name: Save Log
       uses: actions/upload-artifact@v2
