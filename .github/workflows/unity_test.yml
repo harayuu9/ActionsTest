@@ -37,7 +37,7 @@ jobs:
 
       # Test
       - name: Tests
-        uses: game-ci/unity-test-runner@v2
+        uses: game-ci/unity-test-runner@v2.0-alpha-5
         id: tests
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
